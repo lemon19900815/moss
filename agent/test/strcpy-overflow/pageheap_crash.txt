@@ -1,0 +1,314 @@
+
+Microsoft (R) Windows Debugger Version 10.0.17763.132 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+CommandLine: helloworld.exe
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+Deferred                                       srv*C:\symcache*https://msdl.microsoft.com/download/symbols
+Symbol search path is: srv*C:\symcache*https://msdl.microsoft.com/download/symbols
+Executable search path is: 
+ModLoad: 00007ff7`04860000 00007ff7`0490d000   helloworld.exe
+ModLoad: 00007ff9`7f2f0000 00007ff9`7f4e8000   ntdll.dll
+ModLoad: 00007ff8`ff810000 00007ff8`ff884000   C:\Windows\System32\verifier.dll
+Page heap: pid 0x5DF8: page heap enabled with flags 0x3.
+ModLoad: 00007ff9`7d440000 00007ff9`7d502000   C:\Windows\System32\KERNEL32.DLL
+ModLoad: 00007ff9`7ccc0000 00007ff9`7cfb6000   C:\Windows\System32\KERNELBASE.dll
+hello world
+source  = 118 chars
+buffer  = 100 bytes
+buf      @ 0000017A6755CF90
+neighbor @ 0000017A6755EF90 (delta = 8192 bytes)
+overflow writes 119 bytes -> 19 bytes past buffer
+calling strcpy(buf, source)...
+(5df8.688c): Access violation - code c0000005 (first chance)
+First chance exceptions are reported before any exception handling.
+This exception may be expected and handled.
+*** WARNING: Unable to verify checksum for helloworld.exe
+helloworld!__entry_from_strcat_in_strcpy+0x52:
+00007ff7`048e1635 88040a          mov     byte ptr [rdx+rcx],al ds:0000017a`6755d000=??
+0:000> cdb: Reading initial command 'r; .ecxr; kb; !analyze -v; q'
+rax=0000342d30353675 rbx=0000017a67487fe0 rcx=ffff818362c6fdd0
+rdx=00007ff7048ed230 rsi=0000000000000000 rdi=0000017a67491d00
+rip=00007ff7048e1635 rsp=0000005e7456fdd8 rbp=0000000000000000
+ r8=0000005e7456fcc0  r9=8101010101010100 r10=8100f8fee0fefcfe
+r11=0000017a6755cf90 r12=0000000000000000 r13=0000000000000000
+r14=0000000000000000 r15=0000000000000000
+iopl=0         nv up ei pl nz na pe nc
+cs=0033  ss=002b  ds=002b  es=002b  fs=0053  gs=002b             efl=00010202
+helloworld!__entry_from_strcat_in_strcpy+0x52:
+00007ff7`048e1635 88040a          mov     byte ptr [rdx+rcx],al ds:0000017a`6755d000=??
+Unable to get exception context, HRESULT 0x8000FFFF
+RetAddr           : Args to Child                                                           : Call Site
+00007ff7`0486ce17 : 00007ff7`048ed358 00007ff7`048fd118 0000005e`7456fcc0 0000005e`7456f731 : helloworld!__entry_from_strcat_in_strcpy+0x52
+00007ff7`048678a8 : 00000000`00000001 0000017a`67487fe0 00000000`00000000 00000000`00000000 : helloworld!main+0x1d7
+(Inline Function) : --------`-------- --------`-------- --------`-------- --------`-------- : helloworld!invoke_main+0x22
+00007ff9`7d457374 : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : helloworld!__scrt_common_main_seh+0x10c
+00007ff9`7f33cc91 : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : KERNEL32!BaseThreadInitThunk+0x14
+00000000`00000000 : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : ntdll!RtlUserThreadStart+0x21
+*******************************************************************************
+*                                                                             *
+*                        Exception Analysis                                   *
+*                                                                             *
+*******************************************************************************
+
+
+KEY_VALUES_STRING: 1
+
+
+STACKHASH_ANALYSIS: 1
+
+TIMELINE_ANALYSIS: 1
+
+Timeline: !analyze.Start
+    Name: <blank>
+    Time: 2026-10-16T09:40:39.562Z
+    Diff: 562 mSec
+
+Timeline: Dump.Current
+    Name: <blank>
+    Time: 2026-10-16T09:40:39.0Z
+    Diff: 0 mSec
+
+Timeline: Process.Start
+    Name: <blank>
+    Time: 2026-10-16T09:40:01.0Z
+    Diff: 38000 mSec
+
+Timeline: OS.Boot
+    Name: <blank>
+    Time: 2026-10-12T00:59:40.0Z
+    Diff: 376859000 mSec
+
+
+DUMP_CLASS: 2
+
+DUMP_QUALIFIER: 0
+
+FAULTING_IP: 
+helloworld!__entry_from_strcat_in_strcpy+52
+00007ff7`048e1635 88040a          mov     byte ptr [rdx+rcx],al
+
+EXCEPTION_RECORD:  (.exr -1)
+ExceptionAddress: 00007ff7048e1635 (helloworld!__entry_from_strcat_in_strcpy+0x0000000000000052)
+   ExceptionCode: c0000005 (Access violation)
+  ExceptionFlags: 00000000
+NumberParameters: 2
+   Parameter[0]: 0000000000000001
+   Parameter[1]: 0000017a6755d000
+Attempt to write to address 0000017a6755d000
+
+FAULTING_THREAD:  0000688c
+
+FOLLOWUP_IP: 
+helloworld!__entry_from_strcat_in_strcpy+52
+00007ff7`048e1635 88040a          mov     byte ptr [rdx+rcx],al
+
+WRITE_ADDRESS:  0000017a6755d000 
+
+ERROR_CODE: (NTSTATUS) 0xc0000005 - <Unable to get error code text>
+
+EXCEPTION_CODE: (NTSTATUS) 0xc0000005 - <Unable to get error code text>
+
+EXCEPTION_CODE_STR:  c0000005
+
+EXCEPTION_PARAMETER1:  0000000000000001
+
+EXCEPTION_PARAMETER2:  0000017a6755d000
+
+WATSON_BKT_PROCSTAMP:  6ad1f084
+
+WATSON_BKT_MODULE:  helloworld.exe
+
+WATSON_BKT_MODSTAMP:  6ad1f084
+
+WATSON_BKT_MODOFFSET:  81635
+
+BUILD_VERSION_STRING:  19041.1.amd64fre.vb_release.191206-1406
+
+MODLIST_WITH_TSCHKSUM_HASH:  73704997bced2d9a3bb20fdd80fc138ccc58d9cd
+
+MODLIST_SHA1_HASH:  69a72ce58b10c2e87ad14d2dc0cb4f8ff70414b8
+
+NTGLOBALFLAG:  2000000
+
+APPLICATION_VERIFIER_FLAGS:  0
+
+PRODUCT_TYPE:  1
+
+SUITE_MASK:  272
+
+DUMP_TYPE:  fe
+
+APPLICATION_VERIFIER_LOADED: 1
+
+PROCESS_NAME:  unknown
+
+ANALYSIS_SESSION_HOST:  xg8584m221215
+
+ANALYSIS_SESSION_TIME:  10-16-2026 17:40:39.0562
+
+ANALYSIS_VERSION: 10.0.17763.132 amd64fre
+
+THREAD_ATTRIBUTES: 
+OS_LOCALE:  CHS
+
+BUGCHECK_STR:  APPLICATION_FAULT_INVALID_POINTER_WRITE_AVRF
+
+DEFAULT_BUCKET_ID:  INVALID_POINTER_WRITE_AVRF
+
+PRIMARY_PROBLEM_CLASS:  APPLICATION_FAULT
+
+PROBLEM_CLASSES: 
+
+    ID:     [0n313]
+    Type:   [@ACCESS_VIOLATION]
+    Class:  Addendum
+    Scope:  BUCKET_ID
+    Name:   Omit
+    Data:   Omit
+    PID:    [Unspecified]
+    TID:    [0x688c]
+    Frame:  [0] : helloworld!__entry_from_strcat_in_strcpy
+
+    ID:     [0n286]
+    Type:   [INVALID_POINTER_WRITE]
+    Class:  Primary
+    Scope:  DEFAULT_BUCKET_ID (Failure Bucket ID prefix)
+            BUCKET_ID
+    Name:   Add
+    Data:   Omit
+    PID:    [Unspecified]
+    TID:    [0x688c]
+    Frame:  [0] : helloworld!__entry_from_strcat_in_strcpy
+
+    ID:     [0n98]
+    Type:   [AVRF]
+    Class:  Addendum
+    Scope:  DEFAULT_BUCKET_ID (Failure Bucket ID prefix)
+            BUCKET_ID
+    Name:   Add
+    Data:   Omit
+    PID:    [0x5df8]
+    TID:    [0x688c]
+    Frame:  [0] : helloworld!__entry_from_strcat_in_strcpy
+
+LAST_CONTROL_TRANSFER:  from 00007ff70486ce17 to 00007ff7048e1635
+
+STACK_TEXT:  
+0000005e`7456fdd8 00007ff7`0486ce17 : 00007ff7`048ed358 00007ff7`048fd118 0000005e`7456fcc0 0000005e`7456f731 : helloworld!__entry_from_strcat_in_strcpy+0x52
+0000005e`7456fde0 00007ff7`048678a8 : 00000000`00000001 0000017a`67487fe0 00000000`00000000 00000000`00000000 : helloworld!main+0x1d7
+0000005e`7456fe50 00007ff9`7d457374 : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : helloworld!__scrt_common_main_seh+0x10c
+0000005e`7456fe90 00007ff9`7f33cc91 : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : KERNEL32!BaseThreadInitThunk+0x14
+0000005e`7456fec0 00000000`00000000 : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : ntdll!RtlUserThreadStart+0x21
+
+
+THREAD_SHA1_HASH_MOD_FUNC:  daa4bba424c0dcd908aefbec84cffff1f63ea1ee
+
+THREAD_SHA1_HASH_MOD_FUNC_OFFSET:  9e25e8f884c8b2cbcb6ea92608b43db0c379050c
+
+THREAD_SHA1_HASH_MOD:  76a64e2e5b13e1799d6931fe423bdf87c32e29ba
+
+FAULT_INSTR_CODE:  740a0488
+
+FAULTING_SOURCE_LINE:  minkernel\crts\ucrt\src\appcrt\string\amd64\strcat.asm
+
+FAULTING_SOURCE_FILE:  minkernel\crts\ucrt\src\appcrt\string\amd64\strcat.asm
+
+FAULTING_SOURCE_LINE_NUMBER:  195
+
+SYMBOL_STACK_INDEX:  0
+
+SYMBOL_NAME:  helloworld!__entry_from_strcat_in_strcpy+52
+
+FOLLOWUP_NAME:  MachineOwner
+
+MODULE_NAME: helloworld
+
+IMAGE_NAME:  helloworld.exe
+
+DEBUG_FLR_IMAGE_TIMESTAMP:  6ad1f084
+
+STACK_COMMAND:  dt ntdll!LdrpLastDllInitializer BaseDllName ; dt ntdll!LdrpFailureData ; ~0s ; .cxr ; kb
+
+FAILURE_BUCKET_ID:  INVALID_POINTER_WRITE_AVRF_c0000005_helloworld.exe!__entry_from_strcat_in_strcpy
+
+BUCKET_ID:  APPLICATION_FAULT_INVALID_POINTER_WRITE_AVRF_helloworld!__entry_from_strcat_in_strcpy+52
+
+FAILURE_EXCEPTION_CODE:  c0000005
+
+FAILURE_IMAGE_NAME:  helloworld.exe
+
+BUCKET_ID_IMAGE_STR:  helloworld.exe
+
+FAILURE_MODULE_NAME:  helloworld
+
+BUCKET_ID_MODULE_STR:  helloworld
+
+FAILURE_FUNCTION_NAME:  __entry_from_strcat_in_strcpy
+
+BUCKET_ID_FUNCTION_STR:  __entry_from_strcat_in_strcpy
+
+BUCKET_ID_OFFSET:  52
+
+BUCKET_ID_MODTIMEDATESTAMP:  6ad1f084
+
+BUCKET_ID_MODCHECKSUM:  0
+
+BUCKET_ID_MODVER_STR:  0.0.0.0
+
+BUCKET_ID_PREFIX_STR:  APPLICATION_FAULT_INVALID_POINTER_WRITE_AVRF_
+
+FAILURE_PROBLEM_CLASS:  APPLICATION_FAULT
+
+FAILURE_SYMBOL_NAME:  helloworld.exe!__entry_from_strcat_in_strcpy
+
+TARGET_TIME:  2026-10-16T09:41:26.000Z
+
+OSBUILD:  19045
+
+OSSERVICEPACK:  5915
+
+SERVICEPACK_NUMBER: 0
+
+OS_REVISION: 0
+
+OSPLATFORM_TYPE:  x64
+
+OSNAME:  Windows 10
+
+OSEDITION:  Windows 10 WinNt SingleUserTS
+
+USER_LCID:  0
+
+OSBUILD_TIMESTAMP:  unknown_date
+
+BUILDDATESTAMP_STR:  191206-1406
+
+BUILDLAB_STR:  vb_release
+
+BUILDOSVER_STR:  10.0.19041.1.amd64fre.vb_release.191206-1406
+
+ANALYSIS_SESSION_ELAPSED_TIME:  30f0b
+
+ANALYSIS_SOURCE:  UM
+
+FAILURE_ID_HASH_STRING:  um:invalid_pointer_write_avrf_c0000005_helloworld.exe!__entry_from_strcat_in_strcpy
+
+FAILURE_ID_HASH:  {66cf2f60-19f1-14f6-01ea-75e2f268db7f}
+
+Followup:     MachineOwner
+---------
+
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'
