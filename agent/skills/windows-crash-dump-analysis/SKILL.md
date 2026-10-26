@@ -147,7 +147,7 @@ gflags /p /disable <exe>               # 用完必关
 - `db` 错误地址：正落在 **118 字符设备 SN 拼接串**中部（`1234-6789-1234|xyz-2-d200-1|...|xyz-2-k200-4`）
 - 源码闭环：该串是 mlinebus 多设备 client id；`MQTTHandler::request()` 用 `strcpy` 拷进调用方 `new char[100]` 定长缓冲 → 写 119 字节（超 112 槽 7 字节）→ LFH 位图损坏
 - 时间线：崩溃前约 100ms 的 request/response 日志中 response 字段 == 该 SN 串 → 触发路径坐实
-- ~~页堆验证（见 `test/strcpy-overflow/helloworld.cpp` 复刻 demo）：裸跑静默越界、delete 时才 0xC0000374；页堆下当场 0xC0000005 于 strcpy 指令~~
+- 页堆验证（见 `test/strcpy-overflow/helloworld.cpp` 复刻 demo）：裸跑静默越界、delete 时才 0xC0000374；页堆下当场 0xC0000005 于 strcpy 指令
 - 结论：**QC 数据库 malloc 只是踩雷点，真凶是约 2 秒前的无界 strcpy**；该 strcpy 自初始提交即存在
 
 **关键教训**：看到 c0000374 而栈在数据库/日志/无关模块时，不要动那个模块——去错误地址的内存里找"别人的数据"。
