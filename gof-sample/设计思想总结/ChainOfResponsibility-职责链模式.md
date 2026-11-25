@@ -13,8 +13,8 @@
     - 不保证被接受（缺点）：既然一个请求没有明确的接收者，那么就不能保证它一定会被处理——该请求可能一直到链的末端都得不到处理。一个请求也可能因该链没有被正确配置而得不到处理。
 
   - UML图
-    ![ChainOfResponsibility](..\img\ChainOfResponsibility.png)
-    ![ChainOfResponsibility-Logger](E:\lemon19900815\misc\gof-sample\img\ChainOfResponsibility-Logger.png)
+    ![ChainOfResponsibility](../img/ChainOfResponsibility.png)
+    ![ChainOfResponsibility-Logger](../img/ChainOfResponsibility-Logger.png)
 
   - 代码示例
 

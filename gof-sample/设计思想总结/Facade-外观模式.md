@@ -13,7 +13,7 @@
 
 - UML图
 
-  ![Facade模式](..\img\Facade.png)
+  ![Facade模式](../img/Facade.png)
 
 - 代码示例
 

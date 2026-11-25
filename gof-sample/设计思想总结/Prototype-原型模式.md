@@ -7,7 +7,7 @@
 
   - UML 图
 
-    ![原型模式](..\img\Prototype.png)
+    ![原型模式](../img/Prototype.png)
 
   - 代码示例
 

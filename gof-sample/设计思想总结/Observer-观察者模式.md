@@ -17,8 +17,8 @@
 
 - UML图
 
-  ![Observer模式](..\img\Observer.png)
-  ![Observer结合Mediator](E:\lemon19900815\misc\gof-sample\img\Observer-Mediator.png)
+  ![Observer模式](../img/Observer.png)
+  ![Observer结合Mediator](../img/Observer-Mediator.png)
 
 - 代码示例
 

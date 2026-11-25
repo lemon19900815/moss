@@ -11,8 +11,8 @@
 
 - UML图
 
-  ![Proxy模式](..\img\Proxy.png)
-  ![Proxy模式-Image实例](E:\lemon19900815\misc\gof-sample\img\Proxy-Image.png)
+  ![Proxy模式](../img/Proxy.png)
+  ![Proxy模式-Image实例](../img/Proxy-Image.png)
 
 - 代码示例
 

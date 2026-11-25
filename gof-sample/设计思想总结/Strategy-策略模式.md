@@ -42,7 +42,7 @@
 
 - UML图
 
-  ![Strategy模式](..\img\Strategy.png)
+  ![Strategy模式](../img/Strategy.png)
 
 - 代码示例
 

@@ -14,8 +14,8 @@
 
 - UML图
 
-  ![Composite模式](..\img\Composite.png)
-  ![Composite模式-Equipment示例](E:\lemon19900815\misc\gof-sample\img\Composite-Equipment.png)
+  ![Composite模式](../img/Composite.png)
+  ![Composite模式-Equipment示例](../img/Composite-Equipment.png)
 
 - 代码示例
 

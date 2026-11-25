@@ -12,7 +12,7 @@
 
 - UML图
 
-  ![Flyweight模式](E:\lemon19900815\misc\gof-sample\img\Flyweight.png)
+  ![Flyweight模式](../img/Flyweight.png)
 
 - 代码示例（以下代码只展示结构效果，编译会出现错误）
 

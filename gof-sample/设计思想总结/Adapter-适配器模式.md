@@ -11,8 +11,8 @@
 
   - UML 图
 
-![Adapter模式](..\img\Adapter.png)
-  ![Adapter模式示例MediaPlayer](E:\lemon19900815\misc\gof-sample\img\Adapter-MediaPlayer.png)
+![Adapter模式](../img/Adapter.png)
+  ![Adapter模式示例MediaPlayer](../img/Adapter-MediaPlayer.png)
 
   - 代码示例
 

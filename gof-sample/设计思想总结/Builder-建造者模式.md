@@ -6,8 +6,8 @@
      - 用户只需要关心我最后实际使用的复杂对象，而不必关心中间的构建过程
 
    - UML 图
-     ![一般模式](..\img\Builder-General.png)
-     ![迷宫示例](..\img\Builder-MazeGame.png)
+     ![一般模式](../img/Builder-General.png)
+     ![迷宫示例](../img/Builder-MazeGame.png)
 
    - 代码示例
 

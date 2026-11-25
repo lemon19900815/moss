@@ -13,6 +13,6 @@
   - UML图
 
 
-![Bridge模式](E:\lemon19900815\misc\gof-sample\img\Bridge.png)
-![Bridge模式-Model示例](E:\lemon19900815\misc\gof-sample\img\Bridge-Model.png)
+![Bridge模式](../img/Bridge.png)
+![Bridge模式-Model示例](../img/Bridge-Model.png)
 

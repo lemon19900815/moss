@@ -12,8 +12,8 @@
 
   - UML图
 
-    ![Decorator模式](..\img\Decorator.png)
-    ![Decorator模式-Stream实例](E:\lemon19900815\misc\gof-sample\img\Decorator-Stream.png)
+    ![Decorator模式](../img/Decorator.png)
+    ![Decorator模式-Stream实例](../img/Decorator-Stream.png)
 
   - 代码示例
 

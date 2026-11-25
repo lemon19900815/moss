@@ -7,8 +7,8 @@
 
   - UML 图
 
-    ![一般模式](..\img\FactoryMethod.png)
-    ![邀请码示例](..\img\FactoryMethod-InviteCode.png)
+    ![一般模式](../img/FactoryMethod.png)
+    ![邀请码示例](../img/FactoryMethod-InviteCode.png)
 
   - 代码示例1（迷宫游戏创建）
 

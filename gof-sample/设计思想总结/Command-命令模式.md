@@ -16,9 +16,9 @@
 
 - UML图
 
-![Command模式](..\img\Command.png)
+![Command模式](../img/Command.png)
 
-![Command模式示例](E:\lemon19900815\misc\gof-sample\img\Command-Stock.png)
+![Command模式示例](../img/Command-Stock.png)
 
 - 代码示例
 
