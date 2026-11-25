@@ -1,6 +1,6 @@
 # `InstallShield`(简称IS)
 
-- 基础使用方法
+## 1. 基础使用方法
   
   - https://blog.csdn.net/plfl520/article/details/4358968
   - https://blog.csdn.net/dy_paradise/article/details/8254200
@@ -9,7 +9,7 @@
   - IS在使用过程中经常卡死情况：[参考该链接进行修改](https://blog.csdn.net/weixin_43976890/article/details/108580457)
   - IS打包x64平台版本出错：”ISDEV : error -5008: Intel64 or AMD64 must be specified in the template of the Summary Stream“，通过修改"Installation Information->General Information->Summary Information Stream->Template Summary"的字典值“Intel;1033->x64;1033”
   
-- 开机自启动设置
+## 2. 开机自启动设置
 
   - 安装程序之后，在运行(Win+R)内输入`shell:startup`进入目录，在当前目录下创建快捷方式关联程序；
 
@@ -33,4 +33,11 @@
     ws.Run ".\test.exe"
     ```
 
-    
+## 3. 设置Dynamic File Linking
+
+通过文件夹或文件添加的方式添加到打包中时，有以下缺陷：
+- 在指定目录下增加文件时，还需要返回来修改打包的工程文件；
+- 并且以这样方式添加的是绝对路径，不是相对路径，在其他位置不可移植；
+
+所以通过Dynamic File Linking的方式可以解决这个问题，具体处理方式见下图：
+![](img/InstallShield使用说明.png)
