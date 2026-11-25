@@ -1,6 +1,229 @@
 # CPP模板基础
 
-## 1. 萃取
+## 1. 模板参数
+
+C++ 模板参数主要分为三大类：
+1. **类型模板参数（Type Template Parameter）**
+2. **非类型模板参数（Non-Type Template Parameter，NTTP）**
+3. **模板模板参数（Template Template Parameter）**
+
+### 1.1 类型模板参数（Type Template Parameter）
+
+通过 `typename` 或 `class` 声明，表示参数是一个类型。
+```c++
+template<typename T>
+class Container {};
+
+template<class T>
+class Container2 {};
+```
+
+可以传入：
+```c++
+Container<int>;
+Container<double>;
+Container<std::string>;
+Container<int*>;
+Container<int&>;
+```
+
+支持默认类型：
+```c++
+template<typename T = int>
+class Container {};
+```
+
+### 1.2 非类型模板参数（Non-Type Template Parameter，NTTP）
+
+非类型模板参数不是传入一个类型，而是传入一个编译期确定的值。
+
+#### 1.2.1 整数、枚举、布尔值
+
+```c++
+template<int N>
+class A {};
+
+template<size_t N>
+class B {};
+
+template<bool Enable>
+class C {};
+
+enum class Mode { Read, Write };
+
+template<Mode M>
+class D {};
+```
+
+使用：
+```c++
+A<100>;
+B<1024>;
+C<true>;
+D<Mode::Read>;
+```
+
+#### 1.2.2 浮点数（C++20）
+
+C++20 开始支持浮点数作为非类型模板参数：
+```c++
+template<double V>
+class Scale {};
+
+Scale<1.5> scale;
+```
+
+#### 1.2.3 指针
+
+可以传递普通函数指针、对象指针：
+```c++
+int Add(int a, int b) { return a + b; }
+
+int globalValue = 100;
+
+template<int(*Func)(int, int)>
+class A {};
+
+template<int* Ptr>
+class B {};
+
+A<Add> a;
+B<&globalValue> b;
+```
+
+
+#### 1.2.4 成员函数指针
+
+```c++
+struct Http {
+	Http& get() {
+		return *this;
+	}
+	
+	Http& post() {
+		return *this;
+	}
+
+// 存在不同签名的重载时，auto不能正确推导参数类型	
+//	Http& post(std::string path) {
+//		return *this;
+//	}
+};
+
+// 如果post存在不同的重载，编译时就会报错，不能正确匹配到正确的函数，
+// 需要使用template<Http&(Http::*Method)()>或者template<decltype(&Http::get) Method>
+template<auto Method>
+void call(Http& http) {
+	(http.*Method)();
+}
+
+int main() {
+	Http http;
+	call<&Http::get>(http);
+	call<&Http::post>(http);
+}
+```
+
+这里使用 `auto`，编译器会自动推导出成员函数指针类型。
+
+#### 1.2.5 成员变量指针
+
+不仅成员函数可以，成员变量也可以：
+```c++
+class Person
+{
+public:
+    int age;
+};
+
+template<auto Member>
+class FieldAccessor {};
+
+FieldAccessor<&Person::age> accessor;
+```
+
+#### 1.2.6 数组引用
+
+还可以传递数组引用：
+```c++
+template<typename T, size_t N>
+class Array {};
+
+int data[10];
+
+template<int (&Arr)[10]>
+class ArrayRef {};
+
+ArrayRef<data> ref;
+```
+
+### 1.3 模板模板参数（Template Template Parameter）
+
+这个比较特殊，它允许把一个模板本身作为参数传递，但是对我们来说并不陌生，C++标准库的容器都是这样的类型。
+```c++
+template<typename T>
+class Vector {};
+
+template<template<typename> class Container, typename T>
+class MyContainer
+{
+public:
+    Container<T> data;
+};
+
+MyContainer<Vector, int> obj;
+```
+
+### 1.4 C++20 的扩展：结构体作为非类型模板参数
+
+C++20 引入了结构化类型（Structural Type）作为非类型模板参数。
+```c++
+struct Config
+{
+    int width;
+    int height;
+
+    constexpr bool operator==(const Config&) const = default;
+};
+
+template<Config C>
+class Window
+{
+public:
+    static constexpr int Width = C.width;
+    static constexpr int Height = C.height;
+};
+
+Window<Config{1920, 1080}> window;
+```
+
+这意味着不只是整数、指针、函数，满足结构化类型要求的类对象也能作为模板参数。
+
+要求大致包括：
+- 类型必须是字面量类型。
+- 非静态数据成员必须是 public。
+- 不能有 mutable 成员。
+- 成员类型也必须满足结构化类型要求。
+
+### 1.5 汇总统计
+
+| 参数类别         | 示例                           | 标准    |
+| ------------ | ---------------------------- | ----- |
+| 类型           | `typename T`                 | C++98 |
+| 整数           | `int N`                      | C++98 |
+| 枚举           | `Enum E`                     | C++98 |
+| 布尔值          | `bool B`                     | C++98 |
+| 指针           | `int* P`                     | C++98 |
+| 引用           | `int& R`                     | C++98 |
+| 函数指针         | `int(*F)(int)`               | C++98 |
+| 成员函数指针       | `int (A::*F)()`              | C++98 |
+| 成员变量指针       | `int A::*P`                  | C++98 |
+| 模板模板参数       | `template<typename> class T` | C++98 |
+| `auto` 自动推导值 | `template<auto V>`           | C++17 |
+| 浮点数          | `template<double V>`         | C++20 |
+| 结构体对象        | `template<Config C>`         | C++20 |
+
+## 2. 萃取
 
 总体而言， 我们更倾向于使用如下（稍微模糊的） 定义：
 
@@ -348,9 +571,9 @@ void struct_to_json(json &obj, const T &st, F&& grep)
   
 
 
-## 2. 模板与继承
+## 3. 模板与继承
 
-### 2.1 空基类优化 The Empty Base Class Optimization(EBCO)
+### 3.1 空基类优化 The Empty Base Class Optimization(EBCO)
 
 C++中的类经常是“空” 的， 也就是说它们的内部表征在运行期间不占用内存。 典型的情况是那写只包含类型成员， 非虚成员函数， 以及静态数据成员的类。 而非静态数据成员， 虚函数， 以及虚基类， 在运行期间则是需要占用内存的。然而即使是空的类， 其所占用的内存大小也不是零。如果愿意的话， 运行下面的程序可以证明这一点：  
 
@@ -428,5 +651,5 @@ EBCO 之所以会有这一限制， 是因为我们希望能够通过比较两�
 
 即使有这一限制， 对于模板库而言 EBCO 也依然是一个重要的优化方案， 因为有很多技术在引入基类的时候都只是为了引入一些新的类型别名或者额外的函数功能， 而不会增加新的数据成员。    
 
-### 2.2 奇异递归模板模式 The Curiously Recurring Template Pattern(CRTP)
+### 3.2 奇异递归模板模式 The Curiously Recurring Template Pattern(CRTP)
 
